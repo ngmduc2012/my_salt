@@ -1,4 +1,3 @@
-
 # MySalt - AES Encryption & Decryption
 
 ## Features
@@ -76,7 +75,11 @@ print("Are the encrypted texts equal? $isEncryptedEqual");
 ## Additional information
 - **Salt ensures that the encrypted output is different each time.**
 - **To decrypt correctly, you must use the same passphrase that was used for encryption.**
-- For bug reports and contributions, visit the GitHub repository (TODO: Add repository link).
+- For bug reports and contributions, visit the GitHub repository https://github.com/ngmduc2012/my_salt.git.
+- If you want to know what i do in package, checking my document here https://wong-coupon.gitbook.io/flutter/security/salt
+
+## Developer Team:
+Any comments please contact us [ThaoDoan](https://github.com/mia140602) and [DucNguyen](https://github.com/ngmduc2012)
 
 [![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-orange.png)](https://buymeacoffee.com/ducmng12g)
 
