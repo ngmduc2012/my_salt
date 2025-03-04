@@ -4,4 +4,3 @@
 library;
 
 export 'src/encrypt.dart';
-

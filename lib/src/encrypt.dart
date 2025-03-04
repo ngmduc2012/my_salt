@@ -7,7 +7,9 @@ import 'package:crypto/crypto.dart' as h;
 
 // import 'package:flutter/services.dart';
 
+/// AES encryption and decryption methods compatible with CryptoJS.
 class MySalt {
+  /// AES encryption and decryption methods compatible with CryptoJS.
   const MySalt();
 
   /*
@@ -20,7 +22,10 @@ class MySalt {
 
    */
 
-  // #TESTED
+  /// Encrypts a plain text using AES with a passphrase.
+  ///
+  /// Uses a random salt and CBC mode.
+  /// Returns a Base64 encoded encrypted string.
   String encryptAESCryptoJS(String plainText, String passphrase) {
     try {
       final salt = _genRandomWithNonZero(8);
@@ -30,32 +35,40 @@ class MySalt {
 
       final encrypter = e.Encrypter(e.AES(key, mode: e.AESMode.cbc));
       final encrypted = encrypter.encrypt(plainText, iv: iv);
-      final Uint8List encryptedBytesWithSalt = Uint8List.fromList(_createUint8ListFromString("Salted__") + salt + encrypted.bytes);
+      final Uint8List encryptedBytesWithSalt = Uint8List.fromList(
+          _createUint8ListFromString("Salted__") + salt + encrypted.bytes);
       return base64.encode(encryptedBytesWithSalt);
     } catch (error) {
       rethrow;
     }
   }
 
-  // #TESTED
+  /// Decrypts an AES-encrypted Base64 string using a passphrase.
+  ///
+  /// Returns the decrypted plain text.
   String decryptAESCryptoJS(String encrypted, String passphrase) {
     try {
       final Uint8List encryptedBytesWithSalt = base64.decode(encrypted);
 
-      final Uint8List encryptedBytes = encryptedBytesWithSalt.sublist(16, encryptedBytesWithSalt.length);
+      final Uint8List encryptedBytes =
+          encryptedBytesWithSalt.sublist(16, encryptedBytesWithSalt.length);
       final salt = encryptedBytesWithSalt.sublist(8, 16);
       final keyndIV = _deriveKeyAndIV(passphrase, salt);
       final key = e.Key(keyndIV[0]);
       final iv = e.IV(keyndIV[1]);
 
       final encrypter = e.Encrypter(e.AES(key, mode: e.AESMode.cbc));
-      final decrypted = encrypter.decrypt64(base64.encode(encryptedBytes), iv: iv);
+      final decrypted =
+          encrypter.decrypt64(base64.encode(encryptedBytes), iv: iv);
       return decrypted;
     } catch (error) {
       rethrow;
     }
   }
 
+  /// Verifies if a plain text matches an encrypted string using the passphrase.
+  ///
+  /// Returns `true` if the decrypted text matches the original text.
   bool verify({
     required String text,
     required String encrypted,
@@ -68,6 +81,9 @@ class MySalt {
     }
   }
 
+  /// Compares two encrypted strings to check if they decrypt to the same plain text.
+  ///
+  /// Returns `true` if both encrypted texts correspond to the same original value.
   bool verifyEncrypted({
     required String encrypted1,
     required String encrypted2,
@@ -75,7 +91,8 @@ class MySalt {
   }) {
     if (encrypted1 == encrypted2) return false;
     try {
-      return decryptAESCryptoJS(encrypted1, passphrase) == decryptAESCryptoJS(encrypted2, passphrase);
+      return decryptAESCryptoJS(encrypted1, passphrase) ==
+          decryptAESCryptoJS(encrypted2, passphrase);
     } catch (e) {
       return false;
     }
@@ -89,7 +106,7 @@ class MySalt {
     Uint8List preHash = Uint8List(0);
 
     while (!enoughBytesForKey) {
-      final int preHashLength = currentHash.length + password.length + salt.length;
+      // final int preHashLength = currentHash.length + password.length + salt.length;
       if (currentHash.isNotEmpty) {
         preHash = Uint8List.fromList(currentHash + password + salt);
       } else {
@@ -125,15 +142,39 @@ class MySalt {
   }
 }
 
-extension MyHashHelper on Uint8List {
+/// Extension providing cryptographic hash functions for [Uint8List].
+///
+/// This extension allows computing various hash values, including MD5, SHA-1, SHA-2, and SHA-512 variants.
+///
+/// Example:
+/// ```dart
+/// Uint8List data = Uint8List.fromList([1, 2, 3, 4]);
+/// Uint8List md5Hash = data.myMd5;
+/// ```
+extension _MyHashHelper on Uint8List {
+  /// Computes the MD5 hash of the current [Uint8List].
   Uint8List get myMd5 => h.md5.convert(this).bytes as Uint8List;
+/*
+  /// Computes the SHA-1 hash of the current [Uint8List].
   Uint8List get mySha1 => h.sha1.convert(this).bytes as Uint8List;
+
+  /// Computes the SHA-224 hash of the current [Uint8List].
   Uint8List get mySha224 => h.sha224.convert(this).bytes as Uint8List;
+
+  /// Computes the SHA-256 hash of the current [Uint8List].
   Uint8List get mySha256 => h.sha256.convert(this).bytes as Uint8List;
+
+  /// Computes the SHA-384 hash of the current [Uint8List].
   Uint8List get mySha384 => h.sha384.convert(this).bytes as Uint8List;
+
+  /// Computes the SHA-512 hash of the current [Uint8List].
   Uint8List get mySha512 => h.sha512.convert(this).bytes as Uint8List;
+
+  /// Computes the SHA-512/224 hash of the current [Uint8List].
   Uint8List get mySha512224 => h.sha512224.convert(this).bytes as Uint8List;
-  Uint8List get mySha512256 => h.sha512256.convert(this).bytes as Uint8List;
+
+  /// Computes the SHA-512/256 hash of the current [Uint8List].
+  Uint8List get mySha512256 => h.sha512256.convert(this).bytes as Uint8List;*/
 }
 
 /*
