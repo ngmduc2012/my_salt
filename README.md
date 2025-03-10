@@ -79,8 +79,6 @@ print("Are the encrypted texts equal? $isEncryptedEqual");
 - If you want to know what i do in package, checking my document here https://wong-coupon.gitbook.io/flutter/security/salt
 
 ## Developer Team:
-Any comments please contact us [ThaoDoan](https://github.com/mia140602) and [DucNguyen](https://github.com/ngmduc2012)
+[ThaoDoan](https://github.com/mia140602) and [DucNguyen](https://github.com/ngmduc2012)
 
-[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-orange.png)](https://buymeacoffee.com/ducmng12g)
-
-[![Support Me on Ko-fi](https://storage.ko-fi.com/cdn/kofi6.png?v=6)](https://ko-fi.com/I2I81AEJG8)
+[Buy Us A Coffee ❤️](https://buymeacoffee.com/ducmng12g) | [Support Us on Ko-fi ❤️](https://ko-fi.com/I2I81AEJG8)
