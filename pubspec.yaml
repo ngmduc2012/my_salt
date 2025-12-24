@@ -1,6 +1,6 @@
 name: my_salt
 description: MySalt provides AES encryption and decryption with a secure passphrase, ensuring data security with a salt mechanism.
-version: 1.0.2+4
+version: 1.0.3+5
 repository: https://github.com/ngmduc2012/my_salt.git
 funding:
   - https://ko-fi.com/I2I81AEJG8

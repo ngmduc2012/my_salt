@@ -5,15 +5,15 @@ void main() {
   const String passphrase = "my_secure_password";
   const String originalText = "Hello, this is a secret message!";
 
-  // Mã hóa dữ liệu
+  // Encrypt data
   String encryptedText = mySalt.encryptAESCryptoJS(originalText, passphrase);
   print("Encrypted Text: $encryptedText");
 
-  // Giải mã dữ liệu
+  // Decrypt data
   String decryptedText = mySalt.decryptAESCryptoJS(encryptedText, passphrase);
   print("Decrypted Text: $decryptedText");
 
-  // Xác minh văn bản
+  // Verify text
   bool isVerified = mySalt.verify(
     text: originalText,
     encrypted: encryptedText,
@@ -21,7 +21,7 @@ void main() {
   );
   print("Verification Result: $isVerified");
 
-  // Kiểm tra hai bản mã hóa có giống nhau không (chúng sẽ khác nhau do salt khác nhau)
+  // Check if two encrypted texts are identical (they differ because the salt differs)
   String encryptedText2 = mySalt.encryptAESCryptoJS(originalText, passphrase);
   bool isEncryptedEqual = mySalt.verifyEncrypted(
     encrypted1: encryptedText,

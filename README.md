@@ -99,5 +99,3 @@ If you have any suggestions or find any issues, feel free to open an issue or su
 
 ## Developer Team:
 [ThaoDoan](https://github.com/mia140602) and [DucNguyen](https://github.com/ngmduc2012)
-
-[Buy Us A Coffee ❤️](https://buymeacoffee.com/ducmng12g) | [Support Us on Ko-fi ❤️](https://ko-fi.com/I2I81AEJG8)
